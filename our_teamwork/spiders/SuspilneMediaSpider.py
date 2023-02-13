@@ -13,7 +13,7 @@ from our_teamwork.items import OurTeamworkItem
 
 
 class SuspilneMediaSpider(scrapy.Spider):
-    name = 'volonteri'
+    name = 'volunteers'
     BASE_URL = "https://suspilne.media/tag/volonteri/"
     LOAD_NEWS_BNT = (By.XPATH, '//a[@class="c-action-link js-load-more-button"]')
     HEAD = (By.XPATH, '//h1')
@@ -42,9 +42,4 @@ class SuspilneMediaSpider(scrapy.Spider):
     def parse(self, response):
         item = OurTeamworkItem()
         item['article_link'] = response.url
-        # item['article_uuid'] = hashlib.sha256(str(response.url).encode('utf-8')).hexdigest()
-        # item['article_title'] = response.xpath('//h1').extract()
-        #
-        # item['article_text'] = "\n".join(response.xpath('//div[@class="l-article-content__container-inner '
-        #                                                 'c-article-content__content"]/p').extract())
         yield item
