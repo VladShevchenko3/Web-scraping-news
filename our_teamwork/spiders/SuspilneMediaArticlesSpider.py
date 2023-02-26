@@ -7,13 +7,12 @@ from our_teamwork.items import OurTeamworkItem
 
 
 class SuspilneMediaArticlesSpider(scrapy.Spider):
-    name = 'volonteriarticles'
+    name = 'volunteers_articles'
     ARTICLE_TITLE_TEXT_XPATH = '//h1/text()'
     ARTICLE_AUTHOR_TEXT_XPATH = '//a[@class="c-article-info-share__author"]/text()'
     ARTICLE_TEXT_XPATH = '//div[@class="c-article-content c-article-content--bordered"]//p/text()'
 
     def start_requests(self):
-        data = []
         with open('suspilne_media.json') as json_file:
             data = json.load(json_file)
 
