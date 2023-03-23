@@ -35,7 +35,7 @@ class SuspilneMediaSpider(scrapy.Spider):
             time.sleep(2)
         actions.move_to_element(main_title).perform()
         link_elements = driver.find_elements(self.ARTICLE_CARDS[0], self.ARTICLE_CARDS[1])
-        for link_el in link_elements[950:1000]:
+        for link_el in link_elements[0:1000]:
             href = link_el.get_attribute("href")
             yield Request(href)
 
