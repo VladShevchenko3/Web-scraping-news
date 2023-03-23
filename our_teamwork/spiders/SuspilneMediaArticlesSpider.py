@@ -10,6 +10,7 @@ class SuspilneMediaArticlesSpider(scrapy.Spider):
     name = 'volunteers_articles'
     ARTICLE_TITLE_TEXT_XPATH = '//h1/text()'
     ARTICLE_AUTHOR_TEXT_XPATH = '//a[@class="c-article-info-share__author"]/text()'
+    ARTICLE_DATA_XPATH = "//time[@class='c-article-info-share__info__time c-article-info-share__info__time--clock']/text()"
     ARTICLE_TEXT_XPATH = '//div[@class="c-article-content c-article-content--bordered"]//p/text()'
 
     def start_requests(self):
@@ -25,6 +26,7 @@ class SuspilneMediaArticlesSpider(scrapy.Spider):
     def parse(self, response):
         item = OurTeamworkItem()
         item['article_uuid'] = hashlib.sha256(str(response.url).encode('utf-8')).hexdigest()
+        item['article_data'] = response.xpath(self.ARTICLE_DATA_XPATH).extract()
         item['article_title'] = response.xpath(self.ARTICLE_TITLE_TEXT_XPATH).extract()
         item['article_author'] = response.xpath(self.ARTICLE_AUTHOR_TEXT_XPATH).extract()
         item['article_text'] = "\n".join(response.xpath(self.ARTICLE_TEXT_XPATH).extract())

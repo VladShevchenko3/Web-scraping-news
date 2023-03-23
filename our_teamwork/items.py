@@ -7,3 +7,4 @@ class OurTeamworkItem(scrapy.Item):
     article_text = scrapy.Field()
     article_title = scrapy.Field()
     article_author = scrapy.Field()
+    article_data = scrapy.Field()
